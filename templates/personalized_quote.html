@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application - Personalized Quote</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-invoice-pound"></i> Your Personalized Quote</h1>
+        </header>
+        <div class="quote-grid">
+            <div class="quote-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <h2>Loan Amount</h2>
+                <p>£{{ "{:,.2f}".format(quote.loan_amount) }}</p>
+            </div>
+            <div class="quote-item">
+                <i class="fas fa-percentage"></i>
+                <h2>APR</h2>
+                <p>{{ quote.apr }}%</p>
+            </div>
+            <div class="quote-item">
+                <i class="fas fa-calendar-alt"></i>
+                <h2>Term</h2>
+                <p>{{ quote.tenure }} months</p>
+            </div>
+            <div class="quote-item">
+                <i class="fas fa-coins"></i>
+                <h2>Monthly Payment</h2>
+                <p>£{{ "{:,.2f}".format(quote.monthly_payment) }}</p>
+            </div>
+        </div>
+        <div class="action-buttons">
+            <button id="proceed" class="btn-submit" onclick="location.href='{{ url_for('application_successful') }}'">
+                <i class="fas fa-check-circle"></i> Proceed
+            </button>
+            <button id="chatNow" class="btn-secondary">
+                <i class="fas fa-comments"></i> AI Chat
+            </button>
+        </div>
+    </div>
+
+    <div id="aiChatPopup" class="popup">
+        <div class="popup-content">
+            <h2><i class="fas fa-robot"></i> AI Assistant</h2>
+            <p>Not happy with your quote? Our AI Assistant can help!</p>
+            <div class="popup-buttons">
+                <button id="startChat" class="btn-submit">Start Chat</button>
+                <button id="closePopup" class="btn-secondary">No, thanks</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const aiChatPopup = document.getElementById('aiChatPopup');
+            const chatNowButton = document.getElementById('chatNow');
+            const startChatButton = document.getElementById('startChat');
+            const closePopupButton = document.getElementById('closePopup');
+
+            setTimeout(function() {
+                aiChatPopup.style.display = 'block';
+            }, 5000);
+
+            chatNowButton.addEventListener('click', function() {
+                aiChatPopup.style.display = 'block';
+            });
+
+            startChatButton.addEventListener('click', function() {
+                console.log("Starting AI chat...");
+                aiChatPopup.style.display = 'none';
+            });
+
+            closePopupButton.addEventListener('click', function() {
+                aiChatPopup.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

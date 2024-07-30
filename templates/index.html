@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application - Customer Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Customer Information</h1>
+            <p>Please provide your details to proceed with the loan application.</p>
+        </header>
+        <form id="customerForm" action="{{ url_for('loan_purpose') }}" method="post">
+            <div class="form-group">
+                <label for="earnings">Annual Earnings:</label>
+                <input type="number" id="earnings" name="earnings" required min="0" step="1000">
+            </div>
+            
+            <div class="form-group">
+                <label for="spends">Monthly Expenses:</label>
+                <input type="number" id="spends" name="spends" required min="0" step="100">
+            </div>
+            
+            <div class="form-group">
+                <label for="rental">Monthly Rental Expenses:</label>
+                <input type="number" id="rental" name="rental" required min="0" step="100">
+            </div>
+            
+            <div class="form-group">
+                <label for="dependents">Number of Dependents:</label>
+                <input type="number" id="dependents" name="dependents" required min="0" max="10">
+            </div>
+            
+            <div class="form-group">
+                <label for="maritalStatus">Marital Status:</label>
+                <select id="maritalStatus" name="maritalStatus" required>
+                    <option value="">Select an option</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn-submit">Next</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
